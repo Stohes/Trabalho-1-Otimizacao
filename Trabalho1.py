@@ -4,8 +4,8 @@ import textwrap
 # num2 = str(sys.argv[2])
 
 
-num = "18"
-num2 = "23"
+num = "105"
+num2 = "6175"
 
 
 while (len(num) % 3) != 0:
@@ -26,11 +26,17 @@ while len(num) != len(num2):
 
 def add(num, num2):
     newNum = ""
+    carry = False
     for i in range(len(num) - 1, -1, -1):
         if int(num[i]) + int(num2[i]) > 9:
-            newNum = str(int(num[i]) + int(num2[i])) + newNum
+            newNum = str(int(num[i]) + int(num2[i]))[1] + newNum
+            carry = True
         else:
-            newNum = str(int(num[i]) + int(num2[i])) + newNum
+            if carry:
+                newNum = str(int(num[i]) + int(num2[i]) + 1) + newNum
+                carry = False
+            else:
+                newNum = str(int(num[i]) + int(num2[i])) + newNum
     return newNum
 
 
