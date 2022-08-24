@@ -26,11 +26,11 @@ while len(num) != len(num2):
 
 def add(num, num2):
     newNum = ""
-    for i in range(len(num)):
-        if (int(num[::-1][i]) + int(num2[::-1][i])) > 9:
-            newNum = str((int(num[::-1][i]) + int(num2[::-1][i]))) + newNum
+    for i in range(len(num) - 1, -1, -1):
+        if int(num[i]) + int(num2[i]) > 9:
+            newNum = str(int(num[i]) + int(num2[i])) + newNum
         else:
-            newNum = str((int(num[::-1][i]) + int(num2[::-1][i]))) + newNum
+            newNum = str(int(num[i]) + int(num2[i])) + newNum
     return newNum
 
 
