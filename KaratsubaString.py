@@ -71,6 +71,6 @@ def karatsuba(a, b):
 
     return add(a1b1, add(a1b2, add(a1b3, add(a2b1, add(a2b2, add(a2b3, add(a3b1, add(a3b2, a3b3))))))))
 
-
+print("")
 print(karatsuba(num, num2).lstrip("0"))
 
