@@ -1,11 +1,12 @@
-num = "1234567"
-num2 = "32145"
-# 9.685.156.215
-# 38.675.145.215
-while (len(num) % 3) != 0:
+import sys
+num = str(sys.argv[1])
+num2 = str(sys.argv[2])
+
+
+while (len(num) % 243) != 0:
     num = "0" + num
 
-while (len(num2) % 3) != 0:
+while (len(num2) % 243) != 0:
     num2 = "0" + num2
 
 while len(num) != len(num2):
@@ -27,8 +28,6 @@ def add(num, num2):
         else:
             num = "0" + num
 
-    print("]] " + num)
-    print("]] " + num2)
     for i in range(len(num) - 1, -1, -1):
         if int(num[i]) + int(num2[i]) + carry > 9:
             if carry == 1:
@@ -42,8 +41,8 @@ def add(num, num2):
                 carry = 0
             else:
                 newNum = str(int(num[i]) + int(num2[i])) + newNum
-    print("--------------")
-    print(newNum)
+    if carry:
+        return "1" + newNum
     return newNum
 
 
@@ -52,9 +51,7 @@ def karatsuba(a, b):
         return str(int(a) * int(b))
 
     third = len(str(a)) // 3
-
-    # if third == 0: mudar pra 9 la em cima
-
+        
     a1 = a[0:third]
     a2 = a[third:third*2]
     a3 = a[third*2:]
@@ -62,7 +59,7 @@ def karatsuba(a, b):
     b2 = b[third:third*2]
     b3 = b[third*2:]
 
-    a1b1 = karatsuba(a1, b1) + ((len(a) - len(a1) + len(b) - len(b1))) * "0"
+    a1b1 = karatsuba(a1, b1) + (len(a) - len(a1) + len(b) - len(b1)) * "0"
     a1b2 = karatsuba(a1, b2) + (len(a) - len(a1) + len(b) - len(b1) - len(b2)) * "0"
     a1b3 = karatsuba(a1, b3) + (len(a) - len(a1)) * "0"
     a2b1 = karatsuba(a2, b1) + (len(a) - len(a1) - len(a2) + len(b) - len(b1)) * "0"
@@ -72,19 +69,8 @@ def karatsuba(a, b):
     a3b2 = karatsuba(a3, b2) + (len(b) - len(b1) - len(b2)) * "0"
     a3b3 = karatsuba(a3, b3)
 
-    print("--------")
-    print(a1b1)
-    print(a1b2)
-    print(a1b3)
-    print(a2b1)
-    print(a2b2)
-    print(a2b3)
-    print(a3b1)
-    print(a3b2)
-    print(a3b3)
     return add(a1b1, add(a1b2, add(a1b3, add(a2b1, add(a2b2, add(a2b3, add(a3b1, add(a3b2, a3b3))))))))
 
 
-print(num)
-print(num2)
-print(karatsuba(num, num2))
+print(karatsuba(num, num2).lstrip("0"))
+
